@@ -17,6 +17,7 @@ short int have_same_elements(unsigned long * array1, unsigned int array1_dimensi
 
 
 int main(int argc, char *argv[]) {
+
 	int fibonacci_result_length = 40;
 	unsigned long * fibonacci_result = fibonacci_array( fibonacci_result_length - 1 );
 
@@ -46,11 +47,20 @@ int main(int argc, char *argv[]) {
 
 unsigned long fibonacci(unsigned int n)
 {
-	if( n == 0 || n == 1){
-		return (unsigned long)n;
-	}else{
-		return (unsigned long) (fibonacci(n-1) + fibonacci(n-2));
+	/* fibonacci(93) = 1.2*10^19
+	 * fibonacci(94) = 1.9*10^19
+	 * But unsigned long range is: [0, 1.84*10^19] so this means an overflow when occur fibonacci(94)
+	 * Obviously since the program is not optimized, I do not recommend using fibonacci greater than 50
+	 */
+	if ( n <= 93){
+		if( n == 0 || n == 1){
+			return (unsigned long)n;
+		}else{
+			return (unsigned long) (fibonacci(n-1) + fibonacci(n-2));
+		}
 	}
+	perror("fibonacci is call with a too big parameter ");
+	exit(EXIT_FAILURE);
 }
 
 
