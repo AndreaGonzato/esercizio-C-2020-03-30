@@ -3,8 +3,8 @@
 #include <unistd.h>
 #include <string.h>
 
-#define	false	0
-#define	true	1
+#define	FALSE	0
+#define	TRUE	1
 
 unsigned long fibonacci(unsigned int n);
 unsigned long * fibonacci_array(unsigned int n);
@@ -110,7 +110,7 @@ unsigned long * make_copy_of_array(unsigned long src_array [] , unsigned int arr
 	// check malloc invocation
 	if (result == NULL) {
 		perror("malloc eror");
-		return EXIT_FAILURE;
+		return NULL;
 	}
 	memcpy(result, src_array, array_dimension * sizeof(unsigned long));
 
@@ -128,11 +128,11 @@ void swap(unsigned long *x, unsigned long *y) {
 
 void reverse_array(unsigned long * src_array, unsigned int array_dimension){
 	int i = 0;
-	int j = array_dimension-1;
+	int j = array_dimension;
 	while(i < j){
+		j--;
 		swap(&src_array[i], &src_array[j]);
 		i++;
-		j--;
 	}
 }
 
@@ -154,12 +154,12 @@ void bubbleSort(unsigned long * src_array, unsigned int array_dimension)
 
 short int have_same_elements(unsigned long * array1, unsigned int array1_dimension, unsigned long * array2, unsigned int array2_dimension){
 	if(array1_dimension != array2_dimension){
-		return false;
+		return FALSE;
 	}
 	for ( int i = 0 ; i < array1_dimension ; i++ ){
 		if(array1[i] != array2[i]){
-			return false;
+			return FALSE;
 		}
 	}
-	return true;
+	return TRUE;
 }
